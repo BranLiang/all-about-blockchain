@@ -15,6 +15,13 @@
 </head>
 <body class='dark'>
   <div>Blockchain?</div>
+  <div>
+    <ul>
+      <li>Brief Introduction</li>
+      <li>Demo Display</li>
+      <li>Real world</li>
+    </ul>
+  </div>
   <div><em>Blockchain</em>: Ordered back-linked list</div>
   <div>
     <pre>
@@ -36,5 +43,76 @@
       </code>
     </pre>
   </div>
+  <div><em>Proof-Of-Work</em>: Find a hash for new block so it can be created</div>
+  <div>
+    <pre>
+      <code>
+        type Block struct {
+          Transactions  []*Transaction
+          PrevBlockHash []byte
+          Hash          []byte
+          Nonce         int
+        }
+      </code>
+    </pre>
+  </div>
+  <div>
+    <pre>
+      <code>
+        func runProofOfWork(block, target) (int, []byte) {
+          nounce := 0
+          for {
+            Hash = HashFromBlockAndNouce(block, nounce)
+            if Hash < target {
+              break
+            } else {
+              nouce++
+            }
+          }
+        }
+      </code>
+    </pre>
+  </div>
+  <div><em>Transaction</em>: Combination of inputs and outputs</div>
+  <div>
+    <pre>
+      <code>
+        type Transaction struct {
+          ID   []byte
+          Vin  []TXInput
+          Vout []TXOutput
+        }
+      </code>
+    </pre>
+  </div>
+  <div>
+    <pre>
+      <code>
+        type TXOutput struct {
+          value        int
+          ScriptPubKey string
+        }
+
+        type TXInput struct {
+          Txid      []byte
+          Vout      int
+          ScriptSig string
+        }
+      </code>
+    </pre>
+  </div>
+  <div>Unspent Transaction Outputs(UTXO): Where your <em>COINs</em> stays</div>
+  <div><em>Wallet</em>: PrivateKey + PublicKey</div>
+  <div>
+    <pre>
+      <code>
+        type Wallet struct {
+          PrivateKey ecdsa.PrivateKey
+          PublicKey  []byte
+        }
+      </code>
+    </pre>
+  </div>
+  <div>PrivateKey is used for <em>signing</em> transaction and PublicKey is used to <em>verify</em> transaction</div>
 </body>
 </html>
