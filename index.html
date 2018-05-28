@@ -14,7 +14,27 @@
   <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body class='dark'>
-  <div>Blockchain</div>
-  <div>First slide</div>
+  <div>Blockchain?</div>
+  <div><em>Blockchain</em>: Ordered back-linked list</div>
+  <div>
+    <pre>
+      <code>
+        type Blockchain struct {
+          blocks []*Block
+        }
+      </code>
+    </pre>
+  </div>
+  <div><em>Block</em>: Stores transactions and linked to previews block</div>
+  <div>
+    <pre>
+      <code>
+        type Block struct {
+          Transactions  []*Transaction
+          PrevBlockHash []byte
+        }
+      </code>
+    </pre>
+  </div>
 </body>
 </html>
