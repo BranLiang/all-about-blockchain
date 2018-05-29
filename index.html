@@ -89,14 +89,15 @@
     <pre>
       <code>
         type TXOutput struct {
-          value        int
-          ScriptPubKey string
+          Value      int
+          PubKeyHash []byte
         }
 
         type TXInput struct {
           Txid      []byte
           Vout      int
-          ScriptSig string
+          Signature []byte
+          PubKey    []byte
         }
       </code>
     </pre>
@@ -182,5 +183,30 @@
     </pre>
   </div>
   <div>Accumulate UTXOs from the UTXOSet, and <em>sum</em> the value</div>
+  <div>Time to <em>spend</em> some coins!</div>
+  <div>
+    <pre>
+      <code>
+        $ brancoin send -from 1JbE... -to 18PQ... -amount 1
+      </code>
+    </pre>
+  </div>
+  <div>What we <em>just</em> did?</div>
+  <div>1. Find all <em>spendable</em> transaction outputs of the sender</div>
+  <div>2. Prepare to create a <em>new transaction</em>. Question, what the transaction should look like?</div>
+  <div>
+    <pre>
+      <code>
+        type Transaction struct {
+          ID   []byte
+          Vin  []TXInput
+          Vout []TXOutput
+        }
+      </code>
+    </pre>
+  </div>
+  <div>3. Sign the transaction with senders <em>privateKey</em>, means all the transaction input has its signature value</div>
+  <div>4. Create new <em>coinbase</em> transaction</div>
+  <div>5. Create a <em>new block</em> with coinbase transaction and sender's transaction</div>
 </body>
 </html>
