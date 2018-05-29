@@ -114,5 +114,40 @@
     </pre>
   </div>
   <div>PrivateKey is used for <em>signing</em> transaction and PublicKey is used to <em>verify</em> transaction</div>
+  <div>
+    <pre>
+      <code>
+        $ brancoin createWallet
+        Your new address: 1MNPDSUr3YPNt35hCmpXbwxcukPd9Chjjy
+      </code>
+    </pre>
+  </div>
+  <div>Internally you create <em>PublicKey</em> and <em>PrivateKey</em>, and stored it in a local file wallet_300X.dat</div>
+  <div>
+    <pre>
+      <code>
+        map[string]*Wallet{
+          "1MNPDSUr3YPNt35hCmpXbwxcukPd9Chjjy": &Wallet{
+            PrivateKey: "accb4c9d7d4e883051e...",
+            PublicKey: "dcecab0be55135df..."
+          }
+        }
+      </code>
+    </pre>
+  </div>
+  <div>
+    <pre>
+      <code>
+        $ brancoin printWallets
+        --- Wallet 1MNPDSUr3YPNt35hCmpXbwxcukPd9Chjjy:
+               PrivateKey:  accb4c9d7d4e...
+               PublicKey: dcecab0be55...
+        --- Wallet 16SUZuXC4CvTjXMMnd3JYTXFJQJp7ckMUQ:
+               PrivateKey:  96faf90c54e...
+               PublicKey: 55e1bec7b98...
+
+      </code>
+    </pre>
+  </div>
 </body>
 </html>
