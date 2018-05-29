@@ -114,6 +114,7 @@
     </pre>
   </div>
   <div>PrivateKey is used for <em>signing</em> transaction and PublicKey is used to <em>verify</em> transaction</div>
+  <div>First we need a <em>wallet</em></div>
   <div>
     <pre>
       <code>
@@ -149,5 +150,37 @@
       </code>
     </pre>
   </div>
+  <div>Let's create our first <em>blockchain</em></div>
+  <div>
+    <pre>
+      <code>
+        $ brancoin createBlockchain 1JbEcaQoX52MsacPJmFZcs5xkNfrFQrqax
+        b26975db665935e8d9bed8be7c23dac4c0b21e5278aa7115920bd10574e9c3b1
+
+        Done!
+      </code>
+    </pre>
+  </div>
+  <div>What <em>happened</em> just now?</div>
+  <div>1. NewCoinbaseTX(address, genesisCoinbaseData)</div>
+  <div>2. NewGenesisBlock(cbtx)</div>
+  <div>3. Store the block to the blockchain</div>
+  <div>Additionally Reindex the <em>UTXOs</em> -> Store the unspend transaction outputs. (Introduced 2012 for Bitcoin)</div>
+  <div>
+    <pre>
+      <code>
+        $ brancoin printChain
+      </code>
+    </pre>
+  </div>
+  <div>How many <em>coins</em> do I have now?</div>
+  <div>
+    <pre>
+      <code>
+        $ brancoin getBalance 1JbEcaQoX52MsacPJmFZcs5xkNfrFQrqax
+      </code>
+    </pre>
+  </div>
+  <div>Accumulate UTXOs from the UTXOSet, and <em>sum</em> the value</div>
 </body>
 </html>
