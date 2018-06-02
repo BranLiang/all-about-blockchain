@@ -281,5 +281,100 @@
     </pre>
   </div>
   <div>Interesting usage -> Using <em>events</em> as a <em>cheaper</em> form of storage.</div>
+
+  <div>Let's build a <em>DApp</em>!</div>
+  <div>Install the <a href="https://github.com/ethereum/mist/releases" target="_blank">Ethereum Mist</a></div>
+  <div>Operate a <a href="https://github.com/ethereum/go-ethereum" target="_blank">private network</a></div>
+  <div>
+    <pre>
+      <code>
+        // Dockerfile
+        FROM ethereum/client-go
+        ADD ./genesis.json /root
+
+        // genesis.json
+        {
+            "config": {
+                "chainId": 42,
+                "homesteadBlock": 0,
+                "eip155Block": 0,
+                "eip158Block": 0
+            },
+            "difficulty": "1",
+            "gasLimit": "2500000",
+            "alloc": {}
+        }
+      </code>
+    </pre>
+  </div>
+  <div>
+    <pre>
+      <code>
+        // Init the geth client
+        $ docker run -v $(pwd):/root/ private-net-docker init /root/genesis.json
+      </code>
+    </pre>
+  </div>
+  <div>
+    <pre>
+      <code>
+        // New account
+        $ docker run -v $(pwd):/root/ -it private-net-docker account new
+      </code>
+    </pre>
+  </div>
+  <div>
+    <pre>
+      <code>
+        // New account
+        $ docker run -p 8545:8545 -p 8546:8546 -v $(pwd):/root/ private-net-docker --etherbase=0xe94e4d42ce8f65e491fdaaecc8e4cf389a04d6af --networkid 42 --mine --minerthreads=1 --rpc --rpcaddr 0.0.0.0 --rpcapi "db,eth,net,web3,personal"
+      </code>
+    </pre>
+  </div>
+  <div>Compile the solidity to <em>binary</em></div>
+  <div>
+    <pre>
+      <code>
+        pragma solidity ^0.4.16;
+        contract Test {
+            uint public id = 0;
+            function getId() public view returns (uint id_counter) {
+                return id;
+            }
+            function nextId() public {
+                id++;
+            }
+        }
+      </code>
+    </pre>
+  </div>
+  <div>
+    <pre>
+      <code>
+        // Build
+        $ docker build . -t contract
+        // Compile
+        $ docker run -v $(pwd):/srv/app/ contract --optimize --abi --bin /srv/app/test.sol
+      </code>
+    </pre>
+  </div>
+  <div>
+    <pre>
+      <code>
+        // Start the Mist linked to our private node
+        $ /Applications/Mist.app/Contents/MacOS/Mist --rpc http://localhost:8545 --swarmurl "null"
+      </code>
+    </pre>
+  </div>
+  <div>
+    <pre>
+      <code>
+        // Start app server
+        $ docker run -p 8080:8080 -v $(pwd):/srv/app/ dapp npm i
+        $ docker run -p 8080:8080 -v $(pwd):/srv/app/ dapp npm run start
+      </code>
+    </pre>
+  </div>
+  <div>Woo, finally done!</div>
 </body>
 </html>
