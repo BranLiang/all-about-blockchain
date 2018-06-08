@@ -372,8 +372,13 @@
   <div>
     <pre>
       <code>
-        // New account
-        $ docker run -p 8545:8545 -p 8546:8546 -v $(pwd):/root/ private-net-docker --etherbase=0xe94e4d42ce8f65e491fdaaecc8e4cf389a04d6af --networkid 42 --mine --minerthreads=1 --rpc --rpcaddr 0.0.0.0 --rpcapi "db,eth,net,web3,personal"
+        // Start the priavte net server
+        $ docker run -p 8545:8545 -p 8546:8546
+        -v $(pwd):/root/ private-net-docker
+        --etherbase=0xe94e4d42ce8f65e491fdaaecc8e4cf389a04d6af
+        --networkid 42 --mine
+        --minerthreads=1 --rpc --rpcaddr 0.0.0.0
+        --rpcapi "db,eth,net,web3,personal"
       </code>
     </pre>
   </div>
@@ -421,6 +426,7 @@
       </code>
     </pre>
   </div>
-  <div>Woo, finally done!</div>
+  <div>One <em>more</em> thing</div>
+  <div><a href='http://truffleframework.com/' target='_blank'>Truffle</a></div>
 </body>
 </html>
