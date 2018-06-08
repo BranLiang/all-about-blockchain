@@ -14,14 +14,30 @@
   <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body class='dark'>
-  <div>Blockchain?</div>
+  <div>Blockchain</div>
+  <div>I don't know <em>anything</em> about blockchain before new years eve</div>
   <div>
     <ul>
-      <li>Brief Introduction</li>
+      <li>Bitcoin Intro</li>
       <li>Demo Display</li>
+      <li>Ethereum Intro</li>
       <li>Real world</li>
     </ul>
   </div>
+  <div>Features</div>
+  <div>
+    <ul>
+      <li>Maintain global history of transactions</li>
+      <li>Guaranteed consistency</li>
+      <li>Without centralization or intermediaries</li>
+      <li>resistant to forery and fraud</li>
+    </ul>
+  </div>
+  <div>Blockchain solves the issue of <em>multiparty</em> contention without having to involve a <em>human</em></div>
+  <div>Trust is <em>no longer</em> needed to contentiously interact with a third-party.</div>
+  <div>This is the <em>first</em> ever instance of a technology which can do such a thing.</div>
+  <div>Practically speaking, we have just <em>commoditized</em> the rarest and most delicate of all intangible assets: <em>trust</em></div>
+  <div>In the future, trusting an institution with our interests will be as <em>archaic</em> a concept as reckoning on an abacus is today - Gavin Good</div>
   <div><em>Blockchain</em>: Ordered back-linked list</div>
   <div>
     <pre>
@@ -37,6 +53,8 @@
     <pre>
       <code>
         type Block struct {
+          Timestamp     int64
+          Hash          []byte
           Transactions  []*Transaction
           PrevBlockHash []byte
         }
@@ -50,7 +68,7 @@
         type Block struct {
           Transactions  []*Transaction
           PrevBlockHash []byte
-          Hash          []byte
+          Hash          []byte // MerkleTree hash
           Nonce         int
         }
       </code>
@@ -59,6 +77,17 @@
   <div>
     <pre>
       <code>
+        func NewGenesisBlock() *Block {
+          return NewBlock("Genesis Block", []byte{})
+        }
+      </code>
+    </pre>
+  </div>
+  <div>
+    <pre>
+      <code>
+        target := 000000000000000000100000...
+
         func runProofOfWork(block, target) (int, []byte) {
           nounce := 0
           for {
@@ -73,7 +102,18 @@
       </code>
     </pre>
   </div>
+  <div>
+    <ul>
+      <li>Prepare data</li>
+      <li>Hash it with SHA-256</li>
+      <li>Convert the hash to a big integer</li>
+      <li>Compare the integer with the target</li>
+    </ul>
+  </div>
   <div><em>Transaction</em>: Combination of inputs and outputs</div>
+  <div>
+    <em>No</em> accounts, <em>No</em> balances, <em>No</em> coins
+  </div>
   <div>
     <pre>
       <code>
@@ -102,8 +142,13 @@
       </code>
     </pre>
   </div>
+  <div>
+    <a href='https://blockchain.info/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' target='_blank'>See some transactions</a>
+  </div>
+  <div>Coinbase Transaction: <em>Reward</em> for mining a block</div>
   <div>Unspent Transaction Outputs(UTXO): Where your <em>COINs</em> stays</div>
   <div><em>Wallet</em>: PrivateKey + PublicKey</div>
+  <div>Address like <em>1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa</em> is the product of base58 encoding from the public key.</div>
   <div>
     <pre>
       <code>
